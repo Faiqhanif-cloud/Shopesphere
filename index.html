@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopSphere</title>
 
+    <meta name="title" content="Shopsphere – Your Ultimate Shopping Destination">
+<meta name="description" content="Welcome to Shopsphere – your ultimate shopping destination for high-quality products at affordable prices. Enjoy exclusive deals, fast shipping, and exceptional customer service. Start shopping now!">
+<meta name="keywords" content="shopping, online store, affordable products, high-quality items, fast shipping, Shopsphere">
+<meta name="author" content="Faiq Hanif">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta name="language" content="en">
+<meta name="theme-color" content="#007BFF">
+
+
     <!-- Bootstrap 5 CSS (Latest version) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -737,6 +747,68 @@
     <!-- Bootstrap 5 JS and Popper -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+    // Smooth Scroll for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img[data-src]");
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.onload = () => img.classList.add("loaded");
+                observer.unobserve(img);
+            }
+        });
+    });
 
+    lazyImages.forEach(image => imageObserver.observe(image));
+});
+
+const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target); // Remove observer after animation starts
+        }
+    });
+}, { threshold: 0.5 });
+
+elementsToAnimate.forEach(element => observer.observe(element));
+
+function debounce(func, wait = 20, immediate = true) {
+    let timeout;
+    return function () {
+        const context = this, args = arguments;
+        const later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// Example Usage: Resize Event
+window.addEventListener('resize', debounce(() => {
+    console.log('Window resized');
+}));
+
+
+  </script>  
+     
 </body>
 </html>
